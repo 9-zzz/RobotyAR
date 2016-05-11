@@ -1,0 +1,26 @@
+{
+    "id": 1,
+    "smart_object": "door",
+    "behaviors": [
+        {
+            "behavior": "Go to Pepsi ",
+            "likelihood": "0.2f",
+            "next": "Drive Through Door"
+        },
+        {
+            "behavior": "Pick Up Pepsi ",
+            "likelihood": "0.1f",
+            "next": "Drive Through Door"
+        },
+        {
+            "behavior": "Go to Garbage ",
+            "likelihood": "0.4f",
+            "next": "Drive Through Door"
+        },
+        {
+            "behavior": "Place Pepsi in Garbage ",
+            "likelihood": "0.3f",
+            "next": "Drive Through Door"
+        }
+    ]
+}

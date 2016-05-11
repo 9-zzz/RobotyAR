@@ -1,0 +1,60 @@
+using UnityEngine;
+using System.Collections;
+
+public class DragAndDropHex : MonoBehaviour
+{
+
+    public GameObject collidingWith;
+    public bool isSelected = false;
+    float startingZpos;
+    public Vector3 lastPos;
+
+    void Start()
+    {
+        lastPos = transform.position;
+        startingZpos = transform.position.z;
+    }
+
+    void Update()
+    {
+        if (isSelected)
+        {
+            var v3 = Input.mousePosition;
+            v3.z = startingZpos;
+            v3 = Camera.main.ScreenToWorldPoint(v3);
+            transform.position = v3;
+        }
+    }
+
+    void OnMouseDown()
+    {
+        isSelected = true;
+    }
+
+    void OnMouseUp()
+    {
+        isSelected = false;
+
+        if (collidingWith != null)
+        {
+            transform.position = collidingWith.transform.parent.position;
+            collidingWith.transform.position = lastPos;
+            //collidingWith.transform.position = transform.parent.transform.position;
+            //collidingWith.transform.parent = transform.parent;
+            //transform.parent = collidingWith.transform.parent;
+            lastPos = transform.position;
+            collidingWith = null;
+        }
+        else
+        {
+            transform.position = transform.parent.position;
+        }
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (isSelected)
+            collidingWith = collision.gameObject;
+    }
+
+}
