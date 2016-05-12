@@ -8,9 +8,9 @@ public class UnitTargetManager : MonoBehaviour
     public static UnitTargetManager S;
     
 
-    public GameObject home;
-    public GameObject coke;
-    public GameObject pepsi;
+    public GameObject[] homes;
+    public GameObject[] cokes;
+    public GameObject[] pepsis;
     public GameObject[] missionOrder;
 
 
@@ -23,24 +23,47 @@ public class UnitTargetManager : MonoBehaviour
         S = this;
     }
 
-    public void SetNewTarget(GameObject toSetTarget, GameObject newTarget)
+    int homeCount = 0;
+    public void SetNewTarget(GameObject curr, GameObject newTarget, string behavior, int rank, string currName)
     {
-        toSetTarget.GetComponent<Unit>().target = newTarget.transform; 
+       // print(behavior);
+       //print(rank);
+
+        curr.transform.GetComponent<Unit>().target = newTarget.transform;
+        curr.GetComponent<BehaviorNode>().rank = rank;
+        curr.GetComponent<BehaviorNode>().behavior = behavior;
+        curr.GetComponent<BehaviorNode>().curr = currName;
+        curr.transform.GetChild(0).GetComponent<TextMesh>().text = rank.ToString();
+
+  
     }
 
     public void sort()
     {
-        if (home.GetComponent<Unit>().count < pepsi.GetComponent<Unit>().count)
-        {
-            GameObject temp = missionOrder[0];
-            missionOrder[0] = missionOrder[1];
-            missionOrder[1] = temp;
 
-            SetNewTarget(pepsi, home);
-            SetNewTarget(home, coke);
-            //SetNewTarget(home, coke);
+    }
+
+    GameObject getNextTarget(string behavior)
+    {
+        if (behavior == "Go to Home")
+        {       
+            GameObject temp = homes[homeCount];
+            homeCount++;
+            return temp;   
         }
-
+        else if (behavior == "Go to Pepsi")
+        {
+            return pepsis[0];
+          
+        }
+        else if (behavior == "Go to Coke")
+        {
+            return cokes[0];
+        }
+        else
+        {
+            return null;
+        }
     }
 
     void Start()
@@ -56,33 +79,22 @@ public class UnitTargetManager : MonoBehaviour
            
             int rank = BehaviorManager.S.BNodes[i].GetComponent<BehaviorNode>().rank;
 
+            string curr = BehaviorManager.S.BNodes[i].GetComponent<BehaviorNode>().curr;
+            print(curr);
 
-            if(rank == 0)
+
+          
+            if(curr == "home")
             {
-                SetNewTarget(home, coke);
-                print(temp);
-                print(rank);
+                SetNewTarget(homes[homeCount], getNextTarget(temp), temp, rank, curr);
             }
-
-            if (rank == 1)
+            if (curr == "pepsi")
             {
-                SetNewTarget(coke, home);
-                print(temp);
-                print(rank);
+                SetNewTarget(pepsis[0], getNextTarget(temp), temp, rank, curr);
             }
-
-            if (rank == 2)
+            if (curr == "coke")
             {
-                SetNewTarget(home, pepsi);
-                print(temp);
-                print(rank);
-            }
-
-            if (rank == 3)
-            {
-                SetNewTarget(pepsi, home);
-                print(temp);
-                print(rank);
+                SetNewTarget(cokes[0], getNextTarget(temp), temp, rank, curr);
             }
         }
     }
@@ -90,6 +102,32 @@ public class UnitTargetManager : MonoBehaviour
     void Update()
     {
         //print("Home: " + home.GetComponent<Unit>().count + " Pepsi: " + pepsi.GetComponent<Unit>().count + " Coke: " + coke.GetComponent<Unit>().count);
-       // sort();
-    }    
+        // sort();
+        homeCount = 0;
+        if (Input.GetKeyDown(KeyCode.Space)) { 
+            for (int i = 0; i < 4; i++)
+            {
+                string temp = BehaviorManager.S.BNodes[i].GetComponent<BehaviorNode>().behavior;
+
+                int rank = BehaviorManager.S.BNodes[i].GetComponent<BehaviorNode>().rank;
+
+                string curr = BehaviorManager.S.BNodes[i].GetComponent<BehaviorNode>().curr;
+                if (curr == "home")
+                {
+                    SetNewTarget(homes[homeCount], getNextTarget(temp), temp, rank, curr);
+
+                }
+
+                if (curr == "pepsi")
+                {
+                    SetNewTarget(pepsis[0], getNextTarget(temp), temp, rank, curr);
+                }
+
+                if (curr == "coke")
+                {
+                    SetNewTarget(cokes[0], getNextTarget(temp), temp, rank, curr);
+                }
+            }
+        }
+    }
 }

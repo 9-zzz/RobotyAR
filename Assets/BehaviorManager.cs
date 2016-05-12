@@ -24,6 +24,7 @@ public class BehaviorManager : MonoBehaviour
         for (int i = 0; i < len; i++)
         {
             BNodes[i].GetComponent<BehaviorNode>().behavior = JSONParser.S.brain.behaviors[i].behavior;
+            BNodes[i].GetComponent<BehaviorNode>().curr = JSONParser.S.brain.behaviors[i].next;
             BNodes[i].GetComponent<BehaviorNode>().rank = i;
             //BNodes[i].GetComponent<BehaviorNode>().value = float.Parse(JSONParser.S.brain.behaviors[i].likelihood, System.Globalization.CultureInfo.InvariantCulture);
         }
@@ -33,7 +34,9 @@ public class BehaviorManager : MonoBehaviour
     {
         for (int i = 0; i < len; i++)
         {
-            BNodes[i].GetComponent<BehaviorNode>().rank = i;
+            //BNodes[i].GetComponent<BehaviorNode>().rank = i;
+            print(BNodes[i].GetComponent<BehaviorNode>().behavior);
+            print(BNodes[i].GetComponent<BehaviorNode>().rank);
         }
     }
 

@@ -18,7 +18,7 @@
             "next": "home"
         },
         {
-            "behavior": "Go to home",
+            "behavior": "Go to Home",
             "likelihood": "0.3f",
             "next": "pepsi"
         }
