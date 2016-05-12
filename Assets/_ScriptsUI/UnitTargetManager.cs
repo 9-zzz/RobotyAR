@@ -53,7 +53,7 @@ public class UnitTargetManager : MonoBehaviour
 
     void Update()
     {
-        print("Home: " + home.GetComponent<Unit>().count + " Pepsi: " + pepsi.GetComponent<Unit>().count + " Coke: " + coke.GetComponent<Unit>().count);
+        //print("Home: " + home.GetComponent<Unit>().count + " Pepsi: " + pepsi.GetComponent<Unit>().count + " Coke: " + coke.GetComponent<Unit>().count);
         sort();
     }    
 }

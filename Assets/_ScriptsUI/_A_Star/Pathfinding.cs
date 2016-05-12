@@ -35,7 +35,7 @@ public class Pathfinding : MonoBehaviour
         Node startNode = grid.NodeFromWorldPoint(startPos);
         Node targetNode = grid.NodeFromWorldPoint(targetPos);
 
-        System.IO.File.WriteAllText("D:/GitHubD/unity_sockets/Assets/robotPath.txt", startNode.gridX + ", " + startNode.gridY + "\n");
+      //  System.IO.File.WriteAllText("D:/GitHubD/unity_sockets/Assets/robotPath.txt", startNode.gridX + ", " + startNode.gridY + "\n");
 
         if (startNode.walkable && targetNode.walkable)
         {
@@ -108,7 +108,7 @@ public class Pathfinding : MonoBehaviour
         foreach (Node n in path)
         {
            // print(n.gridX + ", " + n.gridY);
-            System.IO.File.AppendAllText("D:/GitHubD/unity_sockets/Assets/robotPath.txt", n.gridX + ", " + n.gridY + "\n");
+        //    System.IO.File.AppendAllText("D:/GitHubD/unity_sockets/Assets/robotPath.txt", n.gridX + ", " + n.gridY + "\n");
         }
 
         return waypoints;
