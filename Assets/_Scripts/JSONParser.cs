@@ -41,7 +41,7 @@ public class JSONParser : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            print(this.brain.behaviors[i].behavior);
+            //print(this.brain.behaviors[i].behavior);
         }
     }
 

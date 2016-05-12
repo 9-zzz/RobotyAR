@@ -46,14 +46,50 @@ public class UnitTargetManager : MonoBehaviour
     void Start()
     {
         missionOrder = new GameObject[10];
-        missionOrder[0] = home;
-        missionOrder[1] = pepsi;
-        missionOrder[2] = coke;
+        //missionOrder[0] = home;
+        //missionOrder[1] = pepsi;
+        //missionOrder[2] = coke;
+
+        for (int i = 0; i < 4; i++)
+        {
+            string temp = BehaviorManager.S.BNodes[i].GetComponent<BehaviorNode>().behavior;
+           
+            int rank = BehaviorManager.S.BNodes[i].GetComponent<BehaviorNode>().rank;
+
+
+            if(rank == 0)
+            {
+                SetNewTarget(home, coke);
+                print(temp);
+                print(rank);
+            }
+
+            if (rank == 1)
+            {
+                SetNewTarget(coke, home);
+                print(temp);
+                print(rank);
+            }
+
+            if (rank == 2)
+            {
+                SetNewTarget(home, pepsi);
+                print(temp);
+                print(rank);
+            }
+
+            if (rank == 3)
+            {
+                SetNewTarget(pepsi, home);
+                print(temp);
+                print(rank);
+            }
+        }
     }
 
     void Update()
     {
         //print("Home: " + home.GetComponent<Unit>().count + " Pepsi: " + pepsi.GetComponent<Unit>().count + " Coke: " + coke.GetComponent<Unit>().count);
-        sort();
+       // sort();
     }    
 }

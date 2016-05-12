@@ -16,7 +16,7 @@ public class Unit: MonoBehaviour
 
     void Start()
     {
-        PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
+        //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
     }
 
     void Update()
@@ -29,7 +29,7 @@ public class Unit: MonoBehaviour
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
         {
-            print(hit.collider.name);
+            //print(hit.collider.name);
         }
     }
 

@@ -3,24 +3,24 @@
     "smart_object": "door",
     "behaviors": [
         {
-            "behavior": "Fetch",
+            "behavior": "Go to Coke",
             "likelihood": "0.2f",
-            "next": "Drive Through Door"
+            "next": "home"
         },
         {
-            "behavior": "Clean Up",
+            "behavior": "Go to Home",
             "likelihood": "0.1f",
-            "next": "Drive Through Door"
+            "next": "coke"
         },
         {
-            "behavior": "Ask to Open Door",
+            "behavior": "Go to Pepsi",
             "likelihood": "0.4f",
-            "next": "Drive Through Door"
+            "next": "home"
         },
         {
-            "behavior": "Use Handicap Button",
+            "behavior": "Go to home",
             "likelihood": "0.3f",
-            "next": "Drive Through Door"
+            "next": "pepsi"
         }
     ]
 }
